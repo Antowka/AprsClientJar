@@ -1,0 +1,52 @@
+group 'ru.antowka.aprs'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'com.github.johnrengelman.shadow'
+apply plugin: 'application'
+
+mainClassName = 'ru.antowka.aprs.Initializer'
+
+buildscript {
+    repositories { jcenter() }
+    dependencies {
+        classpath 'com.github.jengelman.gradle.plugins:shadow:1.2.2'
+    }
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': mainClassName
+    }
+}
+
+shadowJar {
+    mergeServiceFiles('META-INF/spring.*')
+}
+
+// JDK 8
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+compileJava.options.encoding = 'UTF-8'
+
+repositories {
+
+    maven {
+        url 'http://repo.spring.io/snapshot'
+    }
+
+    mavenLocal()
+    mavenCentral()
+    jcenter()
+}
+
+dependencies {
+    compile 'org.jsoup:jsoup:1.8.3'
+    compile 'org.springframework:spring-context:4.2.2.BUILD-SNAPSHOT'
+    compile 'log4j:log4j:1.2.17'
+    compile 'org.quartz-scheduler:quartz:1.8.6'
+    compile 'org.springframework:spring-support:2.0.8'
+    compile 'org.springframework:spring-tx:2.5.4'
+}

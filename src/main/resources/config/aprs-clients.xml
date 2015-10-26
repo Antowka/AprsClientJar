@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+       <bean id="uu6kfq" class="ru.antowka.aprs.model.AprsClient">
+              <property name="callsign" value="UC6KFQ" />
+              <property name="pass" value="00000" />
+              <property name="latitude" value="4435.01N" />
+              <property name="longitude" value="3420.71E" />
+              <property name="ico" value="y" />
+              <property name="message" value="op.Anton 145.500Mhz/433.500Mhz" />
+       </bean>
+
+       <bean id="rt6k" class="ru.antowka.aprs.model.AprsClient">
+              <property name="callsign" value="RT6K" />
+              <property name="pass" value="00000" />
+              <property name="latitude" value="4557.57N" />
+              <property name="longitude" value="3347.73E0" />
+              <property name="ico" value="E" />
+              <property name="message" value="EchoLink from RUSSIA 145.350Mhz" />
+       </bean>
+
+</beans>
