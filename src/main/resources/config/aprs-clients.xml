@@ -3,7 +3,7 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-       <bean id="uu6kfq" class="ru.antowka.aprs.model.AprsClient">
+       <bean id="uc6kfq" class="ru.antowka.aprs.model.AprsClient">
               <property name="callsign" value="UC6KFQ" />
               <property name="pass" value="00000" />
               <property name="latitude" value="4435.01N" />
@@ -16,9 +16,19 @@
               <property name="callsign" value="RT6K" />
               <property name="pass" value="00000" />
               <property name="latitude" value="4557.57N" />
-              <property name="longitude" value="3347.73E0" />
+              <property name="longitude" value="3347.73E" />
               <property name="ico" value="E" />
               <property name="message" value="EchoLink from RUSSIA 145.350Mhz" />
        </bean>
 
+       <bean id="uc6kfq_wx" class="ru.antowka.aprs.model.AprsWeather">
+              <property name="callsign" value="UC6KFQ" />
+              <property name="pass" value="00000" />
+              <property name="latitude" value="4557.57N" />
+              <property name="longitude" value="3347.73E" />
+              <property name="ico" value="E" />
+              <property name="message" value="Virtual weather station UC6KFQ-WX" />
+
+              <property name="link" value="http://api.openweathermap.org/data/2.5/weather?id=694910&amp;appid=bd82977b86bf27fb59a04b61b657fb6f" />
+       </bean>
 </beans>

@@ -27,10 +27,17 @@
        <bean id="sendAprsPosition" class="ru.antowka.aprs.job.sendAprsPosition">
               <property name="aprsClients">
                      <list>
-                            <ref bean="uu6kfq" />
+                            <ref bean="uc6kfq" />
                             <ref bean="rt6k" />
                      </list>
               </property>
+
+              <property name="aprsWheather">
+                     <list>
+                            <ref bean="uc6kfq_wx" />
+                     </list>
+              </property>
+
               <property name="hostName" value="${aprs.host}" />
               <property name="portNumber" value="${aprs.port}" />
        </bean>

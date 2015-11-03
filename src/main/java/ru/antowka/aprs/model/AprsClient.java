@@ -59,4 +59,31 @@ public class AprsClient {
     public void setMessage(String message) {
         this.message = message;
     }
+
+    /**
+     * Generate APRS object string for send
+     *
+     * @return
+     */
+    public String toString(){
+
+        return  getCallsign()
+                + ">APRS:!"
+                + getLatitude()
+                + "/0"
+                + getLongitude()
+                + getIco()
+                + ""
+                + getMessage()
+                + "\n";
+    }
+
+    /**
+     * Generate auth string for APRS
+     *
+     * @return
+     */
+    public String getAuthString(){
+        return "user " + getCallsign() + " pass " + getPass() + "\n";
+    }
 }

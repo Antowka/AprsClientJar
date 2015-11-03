@@ -1,6 +1,7 @@
 package ru.antowka.aprs.job;
 
 import ru.antowka.aprs.model.AprsClient;
+import ru.antowka.aprs.model.AprsWeather;
 
 import java.io.*;
 import java.net.Socket;
@@ -13,6 +14,8 @@ public class sendAprsPosition {
 
     private List<AprsClient> aprsClients;
 
+    private List<AprsWeather> aprsWheather;
+
     private int portNumber;
 
     private String hostName;
@@ -20,65 +23,76 @@ public class sendAprsPosition {
 
     public void send(){
 
-            aprsClients.stream().forEach(client -> {
+        //Send APRS users
+        aprsClients.stream().forEach(this::sendObjectToAPRS);
 
-                System.out.println("Start send client: " + client.getCallsign());
+        try {
+            Thread.sleep(10000);                 //10 sec
+        } catch(InterruptedException ex) {
+            Thread.currentThread().interrupt();
+        }
 
-                String auth = "user " + client.getCallsign() + " pass " + client.getPass() + "\n";
+        //send WX-stations
+        aprsWheather.stream().forEach(wx -> {
 
-                try {
+            String weatherlink = wx.getLink();
 
-                    Socket sock = new Socket(hostName, portNumber);
-                    BufferedReader in = new BufferedReader(new InputStreamReader(sock.getInputStream()));
-                    PrintWriter out = new PrintWriter(sock.getOutputStream());
+            //todo - make parse weather by link
 
-                    //Send Auth
-                    out.println(auth);
-                    out.flush();
+            sendObjectToAPRS(wx);
+        });
+    }
 
-                    try {
-                        Thread.sleep(3000);                 //3 sec
-                    } catch(InterruptedException ex) {
-                        Thread.currentThread().interrupt();
-                    }
+    /**
+     * Method send APRS object to APRS-server
+     *
+     * @param client
+     */
+    private void sendObjectToAPRS(AprsClient client){
 
-                    //read response
-                    System.out.println("Response on AUTH:");
-                    System.out.println(in.readLine());
+        try {
 
-                    String msg =    client.getCallsign()
-                                    + ">APRS:!"
-                                    + client.getLatitude()
-                                    + "/0"
-                                    + client.getLongitude()
-                                    + client.getIco()
-                                    + ""
-                                    + client.getMessage()
-                                    + "\n";
+            Socket sock = new Socket(hostName, portNumber);
+            BufferedReader in = new BufferedReader(new InputStreamReader(sock.getInputStream()));
+            PrintWriter out = new PrintWriter(sock.getOutputStream());
 
-                    //send message to aprs
-                    out.println(msg);
-                    out.flush();
+            //Send Auth
+            System.out.println("Start send client: " + client.getCallsign());
+            out.println(client.getAuthString());
+            out.flush();
 
-                    //read response
-                    System.out.println("Response on MSG:");
-                    System.out.println(in.readLine());
+            try {
+                Thread.sleep(3000);                 //3 sec
+            } catch(InterruptedException ex) {
+                Thread.currentThread().interrupt();
+            }
 
-                    //close socket
-                    try {
+            //read response
+            System.out.println("Response on AUTH:");
+            System.out.println(in.readLine());
 
-                        in.close();
-                        out.close();
-                        sock.close();
+            //send message to aprs
+            out.println(client.toString());
+            out.flush();
 
-                    } catch (IOException e) {
-                        System.out.println("Can't close socket!!!");
-                    }
+            //read response
+            System.out.println("Response on MSG:");
+            System.out.println(in.readLine());
 
-                } catch (IOException e) {
-                    System.out.println("Socket is fail!!!");
-                }
-            });
+            //close socket
+            try {
+
+                in.close();
+                out.close();
+                sock.close();
+
+            } catch (IOException e) {
+                System.out.println("Can't close socket!!!");
+            }
+
+        } catch (IOException e) {
+            System.out.println("Socket is fail!!!");
+        }
     }
 
 
@@ -99,5 +113,9 @@ public class sendAprsPosition {
 
     public void setAprsClients(List<AprsClient> aprsClients) {
         this.aprsClients = aprsClients;
+    }
+
+    public void setAprsWheather(List<AprsWeather> aprsWheather) {
+        this.aprsWheather = aprsWheather;
     }
 }
