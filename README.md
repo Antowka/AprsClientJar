@@ -63,4 +63,8 @@
         chmod -X /var/www/scripts/aprs-client.jar
    ```
     
-    
+3) Start service: 
+
+   ```bash
+   service aprsclient start
+   ```
