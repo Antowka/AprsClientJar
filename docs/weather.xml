@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<current>
+    <city id="520555" name="Nizhniy Novgorod">
+        <coord lon="44" lat="56.33"></coord>
+        <country>RU</country>
+        <sun rise="2017-01-06T05:34:34" set="2017-01-06T12:46:15"></sun>
+    </city>
+    <temperature value="-26" min="-26" max="-26" unit="metric"></temperature>
+    <humidity value="75" unit="%"></humidity>
+    <pressure value="1029" unit="hPa"></pressure>
+    <wind>
+        <speed value="4" name="Gentle Breeze"></speed>
+        <gusts></gusts>
+        <direction value="330" code="NNW" name="North-northeast"></direction>
+    </wind>
+    <clouds value="40" name="scattered clouds"></clouds>
+    <visibility value="10000"></visibility>
+    <precipitation mode="no"></precipitation>
+    <weather number="802" value="scattered clouds" icon="03n"></weather>
+    <lastupdate value="2017-01-06T19:30:00"></lastupdate>
+</current>

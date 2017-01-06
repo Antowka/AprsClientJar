@@ -18,9 +18,6 @@
               </property>
        </bean>
 
-
-
-
        <!-- JOBS and TRIGGERS -->
 
        <!-- COUNT PUBLIC TICKETS AND SET IN SETTINGS -->
@@ -28,16 +25,13 @@
               <property name="aprsClients">
                      <list>
                             <ref bean="uc6kfq" />
-                            <ref bean="rt6k" />
                      </list>
               </property>
-
               <property name="aprsWheather">
                      <list>
-                            <ref bean="uc6kfq_wx" />
+                            <ref bean="uc6kfqWx" />
                      </list>
               </property>
-
               <property name="hostName" value="${aprs.host}" />
               <property name="portNumber" value="${aprs.port}" />
        </bean>
@@ -49,7 +43,8 @@
 
        <bean id="countTicketsAndSetToSettingsCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
               <property name="jobDetail" ref="countTicketsAndSetToSettingsJob" />
-              <property name="cronExpression" value="0 0/15 * * * ?"/>
-              <!-- <property name="cronExpression" value="* * * * * ?"/> -->
+              <!--<property name="cronExpression" value="0 0/15 * * * ?"/>-->
+              <!--<property name="cronExpression" value="0 0/1 * * * ?"/>-->
+              <property name="cronExpression" value="* * * * * ?"/>
        </bean>
 </beans>

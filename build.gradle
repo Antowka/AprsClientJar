@@ -1,23 +1,28 @@
-group 'ru.antowka.aprs'
-version '1.0-SNAPSHOT'
+group 'ru.antowka'
 
-apply plugin: 'java'
-apply plugin: 'idea'
 apply plugin: 'com.github.johnrengelman.shadow'
-apply plugin: 'application'
+apply plugin: 'java'
+apply plugin: 'eclipse'
 
-mainClassName = 'ru.antowka.aprs.Initializer'
+version = '1.0'
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+compileJava.options.encoding = 'UTF-8'
 
 buildscript {
-    repositories { jcenter() }
+    repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
     dependencies {
-        classpath 'com.github.jengelman.gradle.plugins:shadow:1.2.2'
+        classpath "com.github.jengelman.gradle.plugins:shadow:1.2.4"
     }
 }
 
 jar {
     manifest {
-        attributes 'Main-Class': mainClassName
+        attributes 'Main-Class': 'ru.antowka.aprs.Initializer'
     }
 }
 
@@ -25,18 +30,10 @@ shadowJar {
     mergeServiceFiles('META-INF/spring.*')
 }
 
-// JDK 8
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
-
 compileJava.options.encoding = 'UTF-8'
 
+//Get dependencies from Maven central repository
 repositories {
-
-    maven {
-        url 'http://repo.spring.io/snapshot'
-    }
-
     mavenLocal()
     mavenCentral()
     jcenter()
@@ -44,9 +41,9 @@ repositories {
 
 dependencies {
     compile 'org.jsoup:jsoup:1.8.3'
-    compile 'org.springframework:spring-context:4.2.2.BUILD-SNAPSHOT'
+    compile group: 'org.springframework', name: 'spring-context', version: '4.3.5.RELEASE'
     compile 'log4j:log4j:1.2.17'
     compile 'org.quartz-scheduler:quartz:1.8.6'
-    compile 'org.springframework:spring-support:2.0.8'
+    compile group: 'org.springframework', name: 'spring-support', version: '2.0.8'
     compile 'org.springframework:spring-tx:2.5.4'
 }

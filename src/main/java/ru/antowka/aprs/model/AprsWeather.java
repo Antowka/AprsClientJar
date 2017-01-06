@@ -1,17 +1,14 @@
 package ru.antowka.aprs.model;
 
+import ru.antowka.aprs.model.dto.weather.Current;
+
 /**
  * Created by Anton Nik on 03.11.15.
  */
 public class AprsWeather extends AprsClient {
 
-    private String temperature;
-    private String humidity;
-    private String pressure;
-    private String wind;
-    private String windBlows;
-    private String rain;
     private String link;
+    private Current weather;
 
     public String getLink() {
         return link;
@@ -21,52 +18,8 @@ public class AprsWeather extends AprsClient {
         this.link = link;
     }
 
-    public String getTemperature() {
-        return temperature;
-    }
-
-    public void setTemperature(String temperature) {
-        this.temperature = temperature;
-    }
-
-    public String getHumidity() {
-        return humidity;
-    }
-
-    public void setHumidity(String humidity) {
-        this.humidity = humidity;
-    }
-
-    public String getPressure() {
-        return pressure;
-    }
-
-    public void setPressure(String pressure) {
-        this.pressure = pressure;
-    }
-
-    public String getWind() {
-        return wind;
-    }
-
-    public void setWind(String wind) {
-        this.wind = wind;
-    }
-
-    public String getWindBlows() {
-        return windBlows;
-    }
-
-    public void setWindBlows(String windBlows) {
-        this.windBlows = windBlows;
-    }
-
-    public String getRain() {
-        return rain;
-    }
-
-    public void setRain(String rain) {
-        this.rain = rain;
+    public void setWeather(Current weather) {
+        this.weather = weather;
     }
 
     public String toString(){
@@ -77,11 +30,11 @@ public class AprsWeather extends AprsClient {
                 + getLongitude()
                 + "_.../..."
                 + "g019"
-                + "t058"
-                + "r000"
-                + "p000"
-                + "h65"
-                + "b10242"
-                + ".wview_5_21_7";
+                + "t" + weather.getTemperature().getValue()
+                + "p" + weather.getPressure().getValue()
+                + "h" + weather.getHumidity().getValue()
+                + "b10220"
+                + "L000"
+                + "WX Station";
     }
 }

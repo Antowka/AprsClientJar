@@ -5,30 +5,29 @@
 
        <bean id="uc6kfq" class="ru.antowka.aprs.model.AprsClient">
               <property name="callsign" value="UC6KFQ" />
-              <property name="pass" value="00000" />
-              <property name="latitude" value="4435.01N" />
-              <property name="longitude" value="3420.71E" />
+              <property name="pass" value="22203" />
+              <property name="latitude" value="5619.08N" />
+              <property name="longitude" value="4403.24E" />
               <property name="ico" value="y" />
-              <property name="message" value="op.Anton 145.500Mhz/433.500Mhz" />
+              <property name="message" value="op.Anton (UC6KFQ/3) 145.500Mhz/433.500Mhz" />
        </bean>
 
-       <bean id="rt6k" class="ru.antowka.aprs.model.AprsClient">
-              <property name="callsign" value="RT6K" />
-              <property name="pass" value="00000" />
-              <property name="latitude" value="4557.57N" />
-              <property name="longitude" value="3347.73E" />
-              <property name="ico" value="E" />
-              <property name="message" value="EchoLink from RUSSIA 145.350Mhz" />
-       </bean>
+       <!--<bean id="rt6k" class="ru.antowka.aprs.model.AprsClient">-->
+              <!--<property name="callsign" value="RT6K" />-->
+              <!--<property name="pass" value="6141" />-->
+              <!--<property name="latitude" value="4557.57N" />-->
+              <!--<property name="longitude" value="3347.73E" />-->
+              <!--<property name="ico" value="E" />-->
+              <!--<property name="message" value="EchoLink from RUSSIA 145.350Mhz" />-->
+       <!--</bean>-->
 
-       <bean id="uc6kfq_wx" class="ru.antowka.aprs.model.AprsWeather">
-              <property name="callsign" value="UC6KFQ" />
-              <property name="pass" value="00000" />
-              <property name="latitude" value="4557.57N" />
-              <property name="longitude" value="3347.73E" />
-              <property name="ico" value="E" />
+       <bean id="uc6kfqWx" class="ru.antowka.aprs.model.AprsWeather">
+              <property name="callsign" value="UC6KFQ-10" />
+              <property name="pass" value="22203" />
+              <property name="latitude" value="5619.08N" />
+              <property name="longitude" value="4403.24E" />
+              <property name="ico" value="_" />
               <property name="message" value="Virtual weather station UC6KFQ-WX" />
-
-              <property name="link" value="http://api.openweathermap.org/data/2.5/weather?id=694910&amp;appid=bd82977b86bf27fb59a04b61b657fb6f" />
+              <property name="link" value="http://api.openweathermap.org/data/2.5/weather?id=520555&amp;appid=6b355653425ae248764f197eb0e5b694&amp;mode=xml&amp;units=imperial" />
        </bean>
 </beans>

@@ -2,9 +2,16 @@ package ru.antowka.aprs.job;
 
 import ru.antowka.aprs.model.AprsClient;
 import ru.antowka.aprs.model.AprsWeather;
+import ru.antowka.aprs.model.dto.weather.Current;
 
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
 import java.io.*;
+import java.net.MalformedURLException;
 import java.net.Socket;
+import java.net.URL;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 /**
@@ -13,33 +20,30 @@ import java.util.List;
 public class sendAprsPosition {
 
     private List<AprsClient> aprsClients;
-
     private List<AprsWeather> aprsWheather;
-
     private int portNumber;
-
     private String hostName;
 
 
     public void send(){
 
         //Send APRS users
-        aprsClients.stream().forEach(this::sendObjectToAPRS);
+        //aprsClients.forEach(this::sendObjectToAPRS);
 
-        try {
-            Thread.sleep(10000);                 //10 sec
-        } catch(InterruptedException ex) {
-            Thread.currentThread().interrupt();
-        }
+//        try {
+//            Thread.sleep(10000);                 //10 sec
+//        } catch(InterruptedException ex) {
+//            Thread.currentThread().interrupt();
+//        }
 
         //send WX-stations
-        aprsWheather.stream().forEach(wx -> {
+        aprsWheather.forEach(wx -> {
 
-            String weatherlink = wx.getLink();
-
-            //todo - make parse weather by link
-
-            sendObjectToAPRS(wx);
+            try {
+                sendCurrentWeather(wx);
+            } catch (JAXBException | MalformedURLException e) {
+                e.printStackTrace();
+            }
         });
     }
 
@@ -93,6 +97,28 @@ public class sendAprsPosition {
         } catch (IOException e) {
             System.out.println("Socket is fail!!!");
         }
+    }
+
+    /**
+     * Send current weather to aprs-server
+     *
+     * @param aprsWeather
+     * @return
+     */
+    private void sendCurrentWeather(AprsWeather aprsWeather) throws JAXBException, MalformedURLException {
+
+        JAXBContext context = JAXBContext.newInstance(Current.class);
+        javax.xml.bind.Unmarshaller um = context.createUnmarshaller();
+
+        Path file = Paths.get("/home/anton/Desktop/Projects/AprsClientJar/docs/weather.xml");
+        Current current = (Current)um.unmarshal(file.toFile());
+        //Current current = (Current)um.unmarshal(new URL(aprsWeather.getLink()));
+
+        aprsWeather.setWeather(current);
+
+        sendObjectToAPRS(aprsWeather);
+
+        String test = "";
     }
 
 
