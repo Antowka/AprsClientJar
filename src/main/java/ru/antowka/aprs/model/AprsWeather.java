@@ -2,6 +2,10 @@ package ru.antowka.aprs.model;
 
 import ru.antowka.aprs.model.dto.weather.Current;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * Created by Anton Nik on 03.11.15.
  */
@@ -23,18 +27,21 @@ public class AprsWeather extends AprsClient {
     }
 
     public String toString(){
+
+        DateFormat df = new SimpleDateFormat("DDssmm");
+
         return getCallsign()
-                + ">APRS,TCPXX*,qAX,CWOP-2:="
+                + ">APRS,TCPIP*:@"
+                + df.format(new Date())
+                + "z"
                 + getLatitude()
                 + "/"
                 + getLongitude()
-                + "_.../..."
-                + "g019"
-                + "t" + weather.getTemperature().getValue()
-                + "p" + weather.getPressure().getValue()
-                + "h" + weather.getHumidity().getValue()
-                + "b10220"
-                + "L000"
-                + "WX Station";
+                + "_000/000"
+                + "g000"
+                + "t" + (int)weather.getTemperature().getValue()
+                + "h" + (int)weather.getHumidity().getValue()
+                + "b" + weather.getPressure().getValue() + "0"
+                + "Virtual WX Station";
     }
 }

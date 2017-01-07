@@ -6,12 +6,13 @@ import ru.antowka.aprs.model.dto.weather.Current;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.net.MalformedURLException;
 import java.net.Socket;
 import java.net.URL;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
 
 /**
@@ -28,17 +29,16 @@ public class sendAprsPosition {
     public void send(){
 
         //Send APRS users
-        //aprsClients.forEach(this::sendObjectToAPRS);
+        aprsClients.forEach(this::sendObjectToAPRS);
 
-//        try {
-//            Thread.sleep(10000);                 //10 sec
-//        } catch(InterruptedException ex) {
-//            Thread.currentThread().interrupt();
-//        }
+        try {
+            Thread.sleep(10000);                 //10 sec
+        } catch(InterruptedException ex) {
+            Thread.currentThread().interrupt();
+        }
 
         //send WX-stations
         aprsWheather.forEach(wx -> {
-
             try {
                 sendCurrentWeather(wx);
             } catch (JAXBException | MalformedURLException e) {
@@ -76,6 +76,7 @@ public class sendAprsPosition {
             System.out.println(in.readLine());
 
             //send message to aprs
+            System.out.println(client.toString());
             out.println(client.toString());
             out.flush();
 
@@ -110,15 +111,13 @@ public class sendAprsPosition {
         JAXBContext context = JAXBContext.newInstance(Current.class);
         javax.xml.bind.Unmarshaller um = context.createUnmarshaller();
 
-        Path file = Paths.get("/home/anton/Desktop/Projects/AprsClientJar/docs/weather.xml");
-        Current current = (Current)um.unmarshal(file.toFile());
-        //Current current = (Current)um.unmarshal(new URL(aprsWeather.getLink()));
+//      Path file = Paths.get("/home/anton/Desktop/Projects/AprsClientJar/docs/weather.xml");
+//      Current current = (Current)um.unmarshal(file.toFile());
+        Current current = (Current)um.unmarshal(new URL(aprsWeather.getLink()));
 
         aprsWeather.setWeather(current);
 
         sendObjectToAPRS(aprsWeather);
-
-        String test = "";
     }
 
 
