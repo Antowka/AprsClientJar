@@ -18,7 +18,7 @@ import java.util.List;
 /**
  * Created by Anton Nikanorov on 26.10.15.
  */
-public class sendAprsPosition {
+public class SendAprsPosition {
 
     private List<AprsClient> aprsClients;
     private List<AprsWeather> aprsWheather;
@@ -111,8 +111,6 @@ public class sendAprsPosition {
         JAXBContext context = JAXBContext.newInstance(Current.class);
         javax.xml.bind.Unmarshaller um = context.createUnmarshaller();
 
-//      Path file = Paths.get("/home/anton/Desktop/Projects/AprsClientJar/docs/weather.xml");
-//      Current current = (Current)um.unmarshal(file.toFile());
         Current current = (Current)um.unmarshal(new URL(aprsWeather.getLink()));
 
         aprsWeather.setWeather(current);

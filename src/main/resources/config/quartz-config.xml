@@ -21,7 +21,7 @@
        <!-- JOBS and TRIGGERS -->
 
        <!-- COUNT PUBLIC TICKETS AND SET IN SETTINGS -->
-       <bean id="sendAprsPosition" class="ru.antowka.aprs.job.sendAprsPosition">
+       <bean id="sendAprsPosition" class="ru.antowka.aprs.job.SendAprsPosition">
               <property name="aprsClients">
                      <list>
                             <ref bean="uc6kfq" />

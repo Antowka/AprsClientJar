@@ -5,6 +5,7 @@ import ru.antowka.aprs.model.dto.weather.Current;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.TimeZone;
 
 /**
  * Created by Anton Nik on 03.11.15.
@@ -28,7 +29,8 @@ public class AprsWeather extends AprsClient {
 
     public String toString(){
 
-        DateFormat df = new SimpleDateFormat("DDssmm");
+        DateFormat df = new SimpleDateFormat("DDHHss");
+        df.setTimeZone(TimeZone.getTimeZone("GMT"));
 
         return getCallsign()
                 + ">APRS,TCPIP*:@"
@@ -41,7 +43,7 @@ public class AprsWeather extends AprsClient {
                 + "g000"
                 + "t" + (int)weather.getTemperature().getValue()
                 + "h" + (int)weather.getHumidity().getValue()
-                + "b" + weather.getPressure().getValue() + "0"
-                + "Virtual WX Station";
+                + "b" + Integer.valueOf(weather.getPressure().getValue()) + "0"
+                + "Virtual WX Station 2";
     }
 }
