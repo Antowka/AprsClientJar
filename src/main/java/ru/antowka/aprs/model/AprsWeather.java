@@ -29,7 +29,7 @@ public class AprsWeather extends AprsClient {
 
     public String toString(){
 
-        DateFormat df = new SimpleDateFormat("DDHHss");
+        DateFormat df = new SimpleDateFormat("ddHHmm");
         df.setTimeZone(TimeZone.getTimeZone("GMT"));
 
         return getCallsign()
@@ -37,13 +37,12 @@ public class AprsWeather extends AprsClient {
                 + df.format(new Date())
                 + "z"
                 + getLatitude()
-                + "/"
+                + "/0"
                 + getLongitude()
-                + "_000/000"
-                + "g000"
-                + "t" + (int)weather.getTemperature().getValue()
-                + "h" + (int)weather.getHumidity().getValue()
-                + "b" + Integer.valueOf(weather.getPressure().getValue()) + "0"
-                + "Virtual WX Station 2";
+                + "_.../..."
+                + "g..."
+                + "t" + ((int)weather.getTemperature().getValue() - 0.5)
+                + "h" + ((int)weather.getHumidity().getValue() - 20)
+                + "b" + (Integer.valueOf(weather.getPressure().getValue()) - 5) + "0";
     }
 }
