@@ -41,8 +41,8 @@ public class AprsWeather extends AprsClient {
                 + getLongitude()
                 + "_.../..."
                 + "g..."
-                + "t" + ((int)weather.getTemperature().getValue() - 0.5)
-                + "h" + ((int)weather.getHumidity().getValue() - 20)
-                + "b" + (Integer.valueOf(weather.getPressure().getValue()) - 5) + "0";
+                + "t0" + ((int)weather.getTemperature().getValue() - 1)
+                + "h" + ((int)weather.getHumidity().getValue() - 11)
+                + "b" + (Integer.valueOf(weather.getPressure().getValue()) - 20) + "0";
     }
 }
