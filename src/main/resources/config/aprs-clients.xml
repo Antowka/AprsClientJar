@@ -5,20 +5,20 @@
 
        <bean id="uc6kfq" class="ru.antowka.aprs.model.AprsClient">
               <property name="callsign" value="UC6KFQ" />
-              <property name="pass" value="PASS" />
-              <property name="latitude" value="4435.01N" />
-              <property name="longitude" value="3420.72E" />
+              <property name="pass" value="22203" />
+              <property name="latitude" value="4551.60N" />
+              <property name="longitude" value="4007.09E" />
               <property name="ico" value="y" />
-              <property name="message" value="op.Anton (UC6KFQ) 145.500Mhz/433.500Mhz" />
+              <property name="message" value="op.Anton (UC6KFQ) 145.500Mhz/144.300Mhz" />
        </bean>
 
        <bean id="uc6kfqWx" class="ru.antowka.aprs.model.AprsWeather">
               <property name="callsign" value="UC6KFQ-WX" />
-              <property name="pass" value="PASS" />
-              <property name="latitude" value="4435.03N" />
-              <property name="longitude" value="3420.73E" />
+              <property name="pass" value="22203" />
+              <property name="latitude" value="4551.60N" />
+              <property name="longitude" value="4007.08E" />
               <property name="ico" value="_" />
               <property name="message" value="Virtual weather station UC6KFQ-WX" />
-              <property name="link" value="http://api.openweathermap.org/data/2.5/weather?id=709075&amp;appid=6b355653425ae248764f197eb0e5b694&amp;mode=xml&amp;units=imperial" />
+              <property name="link" value="http://api.openweathermap.org/data/2.5/weather?id=483029&amp;appid=6b355653425ae248764f197eb0e5b694&amp;mode=xml&amp;units=imperial" />
        </bean>
 </beans>
